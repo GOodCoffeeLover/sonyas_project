@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<iostream>
-#include<stdlib.h>
-#include<string.h>
+//#include<stdlib.h>
+//#include<string.h>
 #include<string>
 #include<queue>
 #include<vector>
@@ -20,7 +20,7 @@ int find_substring(const string full, const string sub){
 		step=0;
 		for(int j=sub.size()-1; j>=0; j--){
 			if( sub[j] != full[i+j-sub.size() +1]){
-				step=alph[(int) full[i+j-sub.size()+1]]; 
+				step=alph[(int) full[i+j-sub.size()+1]];
 				break;
 			}
 		}
@@ -38,12 +38,13 @@ int main(){
 	//int ingridients.size()s=0;
 	int i, key, p=0;
 	//ingridients=(char **) malloc(sizeof(char *));
-	
-	cout<<"****************************************"<<endl
-	<<"**Программа для анализа состава крема.**"<<endl
-	<<"****************************************"<<endl
-	<<"Вводите состав крема так, как написанно в составе со всеми пробелами и пунктуацией."<<endl
-	<<"Введите ингридиетны:"<<endl;
+
+	cout<<"********************************************"<<endl
+	<<"**Programm for analyzing cream igredients **"<<endl
+	<<"********************************************"<<endl
+	<<"Please, input cream ingridients including all punctuation symbols such as commas and dots."<<endl
+	//<<"Вводите состав крема так, как написанно в составе со всеми пробелами и пунктуацией."<<endl
+	<<"Input>>";
 	while(1){
 		cin>>buffer;
 		//cout<<buffer<<endl;
@@ -86,20 +87,20 @@ int main(){
 			}
 			for(i=0; i<NOGI-1;++i){
 				fread(&key, sizeof(key), 1, incs); fread(&buffer, sizeof(char)*30, 1, incs);
-				
+
 				int size=q1.size();
 				for(int j=0; j<size; ++j){
 					pos=q1.front(); q1.pop();
 					if(ingridients[pos+1+i]==buffer) q1.push(pos);
 				}
 			}
-			if(!q1.empty() &&  (pos=q1.front())<=l){ 
+			if(!q1.empty() &&  (pos=q1.front())<=l){
 				l=pos;
-				r=pos+NOGI-1; 
+				r=pos+NOGI-1;
 				q1.pop();
 			}
 		}
-		
+
 	}
 	fclose(incs);
 //===============================================================================================================================================================
@@ -109,7 +110,8 @@ int main(){
 		if((find_substring(ingridients[i], "glycerin"))>=0) p=i;
 		if( (find_substring(ingridients[i], "oil")>=0 && !p) || find_substring(ingridients[i], "extract")>=0 || find_substring(ingridients[i], "peptide")>=0 || find_substring(ingridients[i], "hyaluronic acid")>=0){
 			if(key){
-				cout<<"Эти активные вещества, добавленны в достаточной дозе:"<<endl;
+                cout<<"These actives are added in appropriate dose:"<<endl;
+			//	cout<<"Эти активные вещества, добавленны в достаточной дозе:"<<endl;
 				key^=1;
 			}else{
 				cout<<","<<endl;
@@ -120,7 +122,7 @@ int main(){
 	for(i=r+1; i<ingridients.size(); i++){
 		if(find_substring(ingridients[i], "hyaluronic acid")>=0){
 			if(key){
-				cout<<"Эти активные вещества, добавленны в достаточной дозе:";
+				 cout<<"These actives are added in appropriate dose:"<<endl;
 				key^=1;
 			}else{
 				cout<<","<<endl;
@@ -128,18 +130,18 @@ int main(){
 			cout<<ingridients[i];
 		}
 	}
-		if(!key){
+    if(!key){
 		cout<<"."<<endl;
 	}else{
-		cout<<"Здесь нет полезных веществ, добавленных в достаточной дозе."<<endl;
-	}
+		 cout<<"There are no active ingredients added in appropriate dose."<<endl;
+    }
 	key=1;
 	//printf("l=%d\n", l);
 	if(p){
 		for(i=p; i<l; i++){
 			if(find_substring(ingridients[i], "oil")>=0){
 				if(key){
-					cout<<"Эти активные вещества, добавленны в недостаточной дозе:"<<endl;
+					cout<<"These actives are added in inappropriate dose:"<<endl;
 					key^=1;
 				}else{
 					cout<<","<<endl;
@@ -151,7 +153,7 @@ int main(){
 	for(i=r+1; i<ingridients.size(); i++){
 		if(find_substring(ingridients[i], "oil")>=0 || find_substring(ingridients[i], "extract")>=0 || find_substring(ingridients[i], "peptide")>=0){
 			if(key){
-				cout<<"Эти активные вещества, добавленны в недостаточной дозе:"<<endl;
+                cout<<"These actives are added in inappropriate dose:"<<endl;
 				key^=1;
 			}else{
 				cout<<","<<endl;
@@ -162,4 +164,6 @@ int main(){
 	if(!key){
 		cout<<"."<<endl;
 	}
+	cout<<"press any key and enter to exit."<<endl;
+	cin>>buffer;
 }
