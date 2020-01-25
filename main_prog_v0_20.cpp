@@ -42,7 +42,8 @@ int main(){
 	cout<<"********************************************"<<endl
 	<<"**Programm for analyzing cream igredients **"<<endl
 	<<"********************************************"<<endl
-	<<"Please, input cream ingridients including all punctuation symbols such as commas and dots."<<endl
+	//<<"Please, input cream ingridients including all punctuation symbols such as commas and dots."<<endl
+	<<"Please, input cream ingridients."<<endl
 	//<<"Вводите состав крема так, как написанно в составе со всеми пробелами и пунктуацией."<<endl
 	<<"Input>>";
 	while(1){
@@ -108,9 +109,14 @@ int main(){
 	p=0;
 	for(i=0;i<l;++i){
 		if((find_substring(ingridients[i], "glycerin"))>=0) p=i;
-		if( (find_substring(ingridients[i], "oil")>=0 && !p) || find_substring(ingridients[i], "extract")>=0 || find_substring(ingridients[i], "peptide")>=0 || find_substring(ingridients[i], "hyaluronic acid")>=0){
+		if( (find_substring(ingridients[i], "oil")>=0 && !p) 
+		|| find_substring(ingridients[i], "extract")>=0 
+		|| find_substring(ingridients[i], "peptide")>=0 
+		|| find_substring(ingridients[i], "hyaluronic acid")>=0){
 			if(key){
-                cout<<"These actives are added in appropriate dose:"<<endl;
+                cout
+                <<"============================================================="<<endl
+                <<"THESE ACTIVES ARE ADDED IN APPROPRIATE DOSE:"<<endl;
 			//	cout<<"Эти активные вещества, добавленны в достаточной дозе:"<<endl;
 				key^=1;
 			}else{
@@ -122,7 +128,9 @@ int main(){
 	for(i=r+1; i<ingridients.size(); i++){
 		if(find_substring(ingridients[i], "hyaluronic acid")>=0){
 			if(key){
-				 cout<<"These actives are added in appropriate dose:"<<endl;
+				cout
+                <<"============================================================="<<endl
+                <<"THESE ACTIVES ARE ADDED IN APPROPRIATE DOSE:"<<endl;
 				key^=1;
 			}else{
 				cout<<","<<endl;
@@ -133,7 +141,9 @@ int main(){
     if(!key){
 		cout<<"."<<endl;
 	}else{
-		 cout<<"There are no active ingredients added in appropriate dose."<<endl;
+		cout
+        <<"============================================================="<<endl
+        <<"THERE ARE NO ACTIVE INGREDIENTS ADDED IN APPROPRIATE DOSE:"<<endl;
     }
 	key=1;
 	//printf("l=%d\n", l);
@@ -141,7 +151,9 @@ int main(){
 		for(i=p; i<l; i++){
 			if(find_substring(ingridients[i], "oil")>=0){
 				if(key){
-					cout<<"These actives are added in inappropriate dose:"<<endl;
+					cout
+					<<"============================================================="<<endl
+                	<<"THESE ACTIVES ARE ADDED IN INAPPROPRIATE DOSE:"<<endl;
 					key^=1;
 				}else{
 					cout<<","<<endl;
@@ -153,7 +165,9 @@ int main(){
 	for(i=r+1; i<ingridients.size(); i++){
 		if(find_substring(ingridients[i], "oil")>=0 || find_substring(ingridients[i], "extract")>=0 || find_substring(ingridients[i], "peptide")>=0){
 			if(key){
-                cout<<"These actives are added in inappropriate dose:"<<endl;
+                cout
+				<<"============================================================="<<endl
+            	<<"THESE ACTIVES ARE ADDED IN INAPPROPRIATE DOSE:"<<endl;
 				key^=1;
 			}else{
 				cout<<","<<endl;
@@ -164,6 +178,8 @@ int main(){
 	if(!key){
 		cout<<"."<<endl;
 	}
-	cout<<"press any key and enter to exit."<<endl;
-	cin>>buffer;
+	cout
+	<<"============================================================="<<endl
+	<<"press enter to exit."<<endl;
+	cin.get();
 }
